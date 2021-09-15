@@ -10,6 +10,6 @@ const app = createExpressServer({
 });
 
 // run express application on port 3000
-app.listen(3000, () => {
+app.listen(process.env.PORT ?? 3000, () => {
   console.log("Api running on port 3000");
 });
