@@ -14,5 +14,5 @@ const port = process.env.PORT ?? 3000;
 
 app.listen(port, () => {
   console.log(`Api running on port ${port}`);
-  App.startedServerAt = new Date();
+  App.serverStartedAt = new Date();
 });

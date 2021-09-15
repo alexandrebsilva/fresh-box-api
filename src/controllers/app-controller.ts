@@ -8,7 +8,7 @@ export class UserController {
     return {
       success: true,
       message: "Api ok!",
-      startedServerAt: App.startedServerAt,
+      serverStartedAt: App.serverStartedAt,
     };
   }
 }

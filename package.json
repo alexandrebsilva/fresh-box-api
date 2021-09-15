@@ -15,7 +15,10 @@
   "scripts": {
     "build": "tsc",
     "start": "node build/index",
-    "start:dev": "ts-node-dev src/index.ts"
+    "start:dev": "ts-node-dev src/index.ts",
+    "docker:run": "docker run -d --rm -p 5432:5432 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=fresh-box --name fresh-box postgres",
+    "docker:stop": "docker stop tm-credit-analysis",
+    "docker:restart": "yarn docker:stop ;yarn docker:run"
   },
   "devDependencies": {
     "@types/jest": "^27.0.1",

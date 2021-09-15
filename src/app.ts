@@ -1,4 +1,4 @@
 export class App {
   constructor() {}
-  static startedServerAt: Date;
+  static serverStartedAt: Date;
 }
