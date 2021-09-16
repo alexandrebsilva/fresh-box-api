@@ -2,7 +2,7 @@ import { JsonController, Get } from "routing-controllers";
 import { App } from "../app";
 
 @JsonController()
-export class UserController {
+export class AppController {
   @Get("/health")
   getAll() {
     return {
