@@ -9,6 +9,7 @@ export class AppController {
       success: true,
       message: "Api ok!",
       serverStartedAt: App.serverStartedAt,
+      dbConnectionStartedAt: App.dbConnectionStartedAt,
     };
   }
 }
