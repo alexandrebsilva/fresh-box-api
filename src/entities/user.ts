@@ -1,7 +1,16 @@
-import { Entity, Column, OneToOne, JoinColumn, OneToMany } from "typeorm";
+import {
+  Entity,
+  Column,
+  OneToOne,
+  JoinColumn,
+  OneToMany,
+  ManyToOne,
+} from "typeorm";
 import { Address } from "./address";
 import { BaseEntity } from "./base-entity";
 import { CreditCard } from "./credit-card";
+import { Order } from "./order";
+import { Plan } from "./plan";
 import { Role } from "./role";
 import { UserStatus } from "./user-status";
 
@@ -41,11 +50,15 @@ export class User extends BaseEntity {
 
   @OneToMany(() => UserStatus, (status: UserStatus) => status.users)
   @JoinColumn()
-  status!: UserStatus;
+  userStatus!: UserStatus;
 
   @OneToMany(() => CreditCard, (creditCard: CreditCard) => creditCard.user)
   creditCards?: CreditCard[];
 
-  @Column()
-  plan?: string;
+  @ManyToOne(() => Plan, (plan: Plan) => plan.users)
+  @JoinColumn()
+  plan!: Plan;
+
+  @OneToMany(() => Order, (order: Order) => order.user)
+  orders!: Order[];
 }

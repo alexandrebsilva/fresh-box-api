@@ -1,9 +1,9 @@
 import { Entity, Column, OneToMany } from "typeorm";
 import { BaseEntity } from "./base-entity";
-import { User } from "./user";
+import { Order } from "./order";
 
 @Entity()
-export class Plan extends BaseEntity {
+export class Menu extends BaseEntity {
   @Column()
   name!: string;
 
@@ -16,6 +16,6 @@ export class Plan extends BaseEntity {
   @Column({ type: "numeric" })
   price!: number;
 
-  @OneToMany(() => User, (user: User) => user.plan)
-  users?: User[];
+  @OneToMany(() => Order, (order: Order) => order.menu)
+  orders?: Order[];
 }
