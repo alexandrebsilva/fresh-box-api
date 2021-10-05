@@ -14,7 +14,7 @@ export class Address extends BaseEntity {
   zpcode!: string;
 
   @Column()
-  neighborhood?: string;
+  neighborhood!: string;
 
   @Column()
   uf!: string;
@@ -22,9 +22,9 @@ export class Address extends BaseEntity {
   @Column()
   city!: string;
 
-  @Column()
-  country?: string;
+  @Column({ default: "BR" })
+  country!: string;
 
   @OneToOne(() => User)
-  user?: User;
+  user!: User;
 }

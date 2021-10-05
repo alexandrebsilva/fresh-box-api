@@ -8,13 +8,13 @@ export class Plan extends BaseEntity {
   name!: string;
 
   @Column()
-  meals?: number;
+  meals!: number;
 
   @Column()
-  portions?: number;
+  portions!: number;
 
   @Column({ type: "numeric" })
-  price?: number;
+  price!: number;
 
   @OneToMany(() => User, (user: User) => user.role)
   users?: User[];

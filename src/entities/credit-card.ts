@@ -23,10 +23,7 @@ export class CreditCard extends BaseEntity {
   @Column()
   expireDate!: Date;
 
-  @Column()
-  description?: string;
-
-  @ManyToOne(() => User, (user: User) => user.role)
+  @ManyToOne(() => User, (user: User) => user.creditCards)
   @JoinColumn()
-  users?: User[];
+  user!: User;
 }

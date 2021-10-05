@@ -1,5 +1,5 @@
 import { JsonController, Param, Body, Get, Post } from "routing-controllers";
-import { getConnection, getManager } from "typeorm";
+import { getManager } from "typeorm";
 import { User } from "../entities/user";
 
 @JsonController("/user")

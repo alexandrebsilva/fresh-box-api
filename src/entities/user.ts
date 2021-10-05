@@ -1,11 +1,4 @@
-import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-  OneToOne,
-  JoinColumn,
-  OneToMany,
-} from "typeorm";
+import { Entity, Column, OneToOne, JoinColumn, OneToMany } from "typeorm";
 import { Address } from "./address";
 import { BaseEntity } from "./base-entity";
 import { CreditCard } from "./credit-card";
@@ -50,7 +43,7 @@ export class User extends BaseEntity {
   @JoinColumn()
   status!: UserStatus;
 
-  @OneToMany(() => CreditCard, (creditCard: CreditCard) => creditCard.users)
+  @OneToMany(() => CreditCard, (creditCard: CreditCard) => creditCard.user)
   creditCards?: CreditCard[];
 
   @Column()
