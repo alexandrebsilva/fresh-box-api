@@ -1,5 +1,5 @@
 import { generateToken } from "../helpers/login";
-import { Credentials } from "../models/credentials";
+import { Credentials } from "../models/auth/credentials";
 
 export class AuthService {
   public async login(credentials: Credentials): Promise<string> {
