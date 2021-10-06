@@ -12,7 +12,7 @@ export class UnitOfMeasurement extends BaseEntity {
 
   @ManyToMany(
     () => Ingredient,
-    (ingredient: Ingredient) => ingredient.unitOfMeasurements
+    (ingredient: Ingredient) => ingredient.unitsOfMeasurements
   )
   ingredients?: Ingredient[];
 }

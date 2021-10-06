@@ -3,7 +3,7 @@ import { BaseEntity } from "./base-entity";
 import { Ingredient } from "./ingredient";
 
 @Entity()
-export class IngredientPicture extends BaseEntity {
+export class ReceipePicture extends BaseEntity {
   @Column()
   fileName!: string;
 
@@ -15,5 +15,5 @@ export class IngredientPicture extends BaseEntity {
 
   @ManyToOne(() => Ingredient, (ingredient: Ingredient) => ingredient.pictures)
   @JoinColumn()
-  ingredient!: Ingredient;
+  receipe!: Ingredient;
 }

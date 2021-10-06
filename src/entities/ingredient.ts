@@ -32,20 +32,21 @@ export class Ingredient extends BaseEntity {
     () => DifficultyLevel,
     (difficultyLevel: DifficultyLevel) => difficultyLevel.receipes
   )
+  @JoinColumn()
   difficultyLevel!: DifficultyLevel[];
 
   @ManyToMany(
     () => UnitOfMeasurement,
     (unitOfMeasurement: UnitOfMeasurement) => unitOfMeasurement.ingredients
   )
-  unitOfMeasurements?: UnitOfMeasurement[];
+  unitsOfMeasurements?: UnitOfMeasurement[];
 
   @ManyToMany(() => Alergy, (alergy: Alergy) => alergy.receipes)
   alergies?: Alergy[];
 
-  @ManyToMany(
+  @OneToMany(
     () => IngredientPicture,
     (ingredientPicture: IngredientPicture) => ingredientPicture.ingredient
   )
-  pictures?: Alergy[];
+  pictures?: IngredientPicture[];
 }

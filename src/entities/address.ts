@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne } from "typeorm";
+import { Entity, Column, OneToOne, JoinColumn } from "typeorm";
 import { BaseEntity } from "./base-entity";
 import { User } from "./user";
 
@@ -26,5 +26,6 @@ export class Address extends BaseEntity {
   country!: string;
 
   @OneToOne(() => User)
+  @JoinColumn()
   user!: User;
 }
