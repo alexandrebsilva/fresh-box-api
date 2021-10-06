@@ -3,6 +3,7 @@ import { Alergy } from "./alergy";
 import { BaseEntity } from "./base-entity";
 import { DifficultyLevel } from "./difficulty-level";
 import { ReceipePicture } from "./receipe-picture";
+import { ReceipeToIngredient } from "./recipe-to-ingredient";
 import { Tag } from "./tag";
 
 @Entity()
@@ -27,7 +28,13 @@ export class Receipe extends BaseEntity {
 
   @OneToMany(
     () => ReceipePicture,
-    (receipePicture: ReceipePicture) => receipePicture.receipe
+    (receipePicture: ReceipePicture) => receipePicture.recipe
   )
   pictures?: ReceipePicture[];
+
+  @OneToMany(
+    () => ReceipeToIngredient,
+    (recipeToIngredient: ReceipeToIngredient) => recipeToIngredient.recipe
+  )
+  recipesToIngredient?: ReceipeToIngredient[];
 }

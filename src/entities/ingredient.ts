@@ -11,6 +11,7 @@ import { BaseEntity } from "./base-entity";
 import { Categoryingredient } from "./category-ingredient";
 import { DifficultyLevel } from "./difficulty-level";
 import { IngredientPicture } from "./ingredient-picture";
+import { ReceipeToIngredient } from "./recipe-to-ingredient";
 import { UnitOfMeasurement } from "./unit-of-measurement";
 
 @Entity()
@@ -49,4 +50,10 @@ export class Ingredient extends BaseEntity {
     (ingredientPicture: IngredientPicture) => ingredientPicture.ingredient
   )
   pictures?: IngredientPicture[];
+
+  @OneToMany(
+    () => ReceipeToIngredient,
+    (recipeToIngredient: ReceipeToIngredient) => recipeToIngredient.ingredient
+  )
+  recipesToIngredient?: ReceipeToIngredient[];
 }

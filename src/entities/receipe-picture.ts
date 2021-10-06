@@ -1,6 +1,6 @@
 import { Entity, Column, JoinColumn, ManyToOne } from "typeorm";
 import { BaseEntity } from "./base-entity";
-import { Ingredient } from "./ingredient";
+import { Receipe } from "./receipe";
 
 @Entity()
 export class ReceipePicture extends BaseEntity {
@@ -13,7 +13,7 @@ export class ReceipePicture extends BaseEntity {
   @Column()
   path!: string;
 
-  @ManyToOne(() => Ingredient, (ingredient: Ingredient) => ingredient.pictures)
+  @ManyToOne(() => Receipe, (recipe: Receipe) => recipe.pictures)
   @JoinColumn()
-  receipe!: Ingredient;
+  recipe!: Receipe;
 }
