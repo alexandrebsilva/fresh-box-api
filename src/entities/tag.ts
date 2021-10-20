@@ -1,6 +1,6 @@
 import { Entity, Column, ManyToMany } from "typeorm";
 import { BaseEntity } from "./base-entity";
-import { Recipe } from "./Recipe";
+import { Recipe } from "./recipe";
 
 @Entity()
 export class Tag extends BaseEntity {

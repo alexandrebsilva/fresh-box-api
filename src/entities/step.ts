@@ -1,6 +1,6 @@
 import { Entity, Column, ManyToOne } from "typeorm";
 import { BaseEntity } from "./base-entity";
-import { Recipe } from "./Recipe";
+import { Recipe } from "./recipe";
 
 @Entity()
 export class Step extends BaseEntity {

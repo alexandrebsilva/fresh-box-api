@@ -8,7 +8,7 @@ import {
 } from "typeorm";
 import { Alergy } from "./alergy";
 import { BaseEntity } from "./base-entity";
-import { Categoryingredient } from "./category-ingredient";
+import { CategoryIngredient } from "./category-ingredient";
 import { DifficultyLevel } from "./difficulty-level";
 import { IngredientPicture } from "./ingredient-picture";
 import { RecipeToIngredient } from "./recipe-to-ingredient";
@@ -23,11 +23,11 @@ export class Ingredient extends BaseEntity {
   description!: string;
 
   @OneToMany(
-    () => Categoryingredient,
-    (categoryingredient: Categoryingredient) => categoryingredient.ingredients
+    () => CategoryIngredient,
+    (categoryIngredient: CategoryIngredient) => categoryIngredient.ingredients
   )
   @JoinColumn()
-  category!: Categoryingredient;
+  category!: CategoryIngredient;
 
   @ManyToOne(
     () => DifficultyLevel,

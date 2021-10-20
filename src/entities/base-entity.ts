@@ -1,4 +1,4 @@
-import { PrimaryGeneratedColumn, CreateDateColumn } from 'typeorm';
+import { PrimaryGeneratedColumn, CreateDateColumn, Entity } from "typeorm";
 
 export abstract class BaseEntity {
   @PrimaryGeneratedColumn()

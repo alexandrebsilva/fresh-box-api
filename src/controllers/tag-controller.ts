@@ -7,16 +7,16 @@ import {
   BadRequestError,
   QueryParam,
 } from "routing-controllers";
-import { Ingredient } from "../entities/ingredient";
+import { Tag } from "../entities/tag";
 import { PaginatedResponse } from "../models/paginated-response";
-import { IngredientService } from "../services/ingredient-service";
+import { TagService } from "../services/tag-service";
 
 @JsonController("/ingredient")
-export class IngredientController {
-  constructor(private readonly service = new IngredientService()) {}
+export class TagController {
+  constructor(private readonly service = new TagService()) {}
 
   @Get("/:id")
-  async getOne(@Param("id") id: number): Promise<Ingredient> {
+  async getOne(@Param("id") id: number): Promise<Tag> {
     const result = await this.service.findById(id);
     if (result === undefined) throw new BadRequestError("Item not found!");
     return result;
@@ -25,7 +25,7 @@ export class IngredientController {
   @Get("/all")
   async getAll(
     @QueryParam("page") page: number
-  ): Promise<PaginatedResponse<Ingredient>> {
+  ): Promise<PaginatedResponse<Tag>> {
     const result = await this.service.findAll(page);
 
     return result;
