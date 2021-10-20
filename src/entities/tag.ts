@@ -1,12 +1,12 @@
 import { Entity, Column, ManyToMany } from "typeorm";
 import { BaseEntity } from "./base-entity";
-import { Receipe } from "./receipe";
+import { Recipe } from "./Recipe";
 
 @Entity()
 export class Tag extends BaseEntity {
   @Column()
   name!: string;
 
-  @ManyToMany(() => Receipe, (receipe: Receipe) => receipe.tags)
-  receipes?: Receipe[];
+  @ManyToMany(() => Recipe, (Recipe: Recipe) => Recipe.tags)
+  Recipes?: Recipe[];
 }

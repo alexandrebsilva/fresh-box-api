@@ -1,9 +1,9 @@
 import { Entity, Column, JoinColumn, ManyToOne } from "typeorm";
 import { BaseEntity } from "./base-entity";
-import { Receipe } from "./receipe";
+import { Recipe } from "./recipe";
 
 @Entity()
-export class ReceipePicture extends BaseEntity {
+export class RecipePicture extends BaseEntity {
   @Column()
   fileName!: string;
 
@@ -13,7 +13,7 @@ export class ReceipePicture extends BaseEntity {
   @Column()
   path!: string;
 
-  @ManyToOne(() => Receipe, (recipe: Receipe) => recipe.pictures)
+  @ManyToOne(() => Recipe, (recipe: Recipe) => recipe.pictures)
   @JoinColumn()
-  recipe!: Receipe;
+  recipe!: Recipe;
 }

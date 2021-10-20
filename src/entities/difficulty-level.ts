@@ -1,6 +1,6 @@
 import { Column, Entity, OneToMany } from "typeorm";
 import { BaseEntity } from "./base-entity";
-import { Receipe } from "./receipe";
+import { Recipe } from "./Recipe";
 
 @Entity()
 export class DifficultyLevel extends BaseEntity {
@@ -10,6 +10,6 @@ export class DifficultyLevel extends BaseEntity {
   @Column()
   description?: string;
 
-  @OneToMany(() => Receipe, (receipe: Receipe) => receipe.difficultyLevel)
-  receipes?: Receipe[];
+  @OneToMany(() => Recipe, (Recipe: Recipe) => Recipe.difficultyLevel)
+  Recipes?: Recipe[];
 }
