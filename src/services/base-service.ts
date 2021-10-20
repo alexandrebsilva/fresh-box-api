@@ -9,13 +9,12 @@ export abstract class BaseService<T> {
     return result;
   }
 
-  async findAll(page = 0): Promise<PaginatedResponse<T>> {
-    page = page - 1;
+  async findAll(page: number): Promise<PaginatedResponse<T>> {
     const [payload, total] = await getRepository(
       this.sourceEntity
     ).findAndCount({
       take: 10,
-      skip: page * 10,
+      skip: page === 1 ? 0 : page * 10,
       order: { dateCreated: "ASC" },
     } as FindConditions<T>);
 
