@@ -1,9 +1,4 @@
-import {
-  EntityTarget,
-  FindConditions,
-  getManager,
-  getRepository,
-} from "typeorm";
+import { EntityTarget, FindConditions, getRepository } from "typeorm";
 import { PaginatedResponse } from "../models/paginated-response";
 
 export abstract class BaseService<T> {
