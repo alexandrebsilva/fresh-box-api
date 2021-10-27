@@ -1,8 +1,10 @@
+import { BadRequestError } from "routing-controllers";
 import { EntityTarget, FindConditions, getRepository } from "typeorm";
 import { PaginatedResponse } from "../models/paginated-response";
 
 export abstract class BaseService<T> {
   constructor(private readonly sourceEntity: EntityTarget<T>) {}
+
   async findById(id: number): Promise<T | undefined> {
     const result = await getRepository(this.sourceEntity).findOne(id);
 
@@ -15,9 +17,25 @@ export abstract class BaseService<T> {
     ).findAndCount({
       take: 10,
       skip: page === 1 ? 0 : page * 10,
-      order: { dateCreated: "ASC" },
+      order: { dateCreated: "DESC" },
     } as FindConditions<T>);
 
     return { total, page, payload };
+  }
+
+  async update(id: number, payload: T): Promise<void> {
+    const result = await this.findById(id);
+    if (!result) {
+      throw new BadRequestError("Item not found");
+    }
+    await getRepository(this.sourceEntity).update(id, payload);
+  }
+
+  async delete(id: number): Promise<void> {
+    const result = await this.findById(id);
+    if (!result) {
+      throw new BadRequestError("Item not found");
+    }
+    await getRepository(this.sourceEntity).delete(id);
   }
 }

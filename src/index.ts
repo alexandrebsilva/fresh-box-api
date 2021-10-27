@@ -8,6 +8,7 @@ import { createConnection } from "typeorm";
 
 // creates express app, registers all controller routes and returns you express app instance
 const app = createExpressServer({
+  validation: true,
   // authorizationChecker: async (action: Action, roles: string[]) => {
   //   // here you can use request/response objects from action
   //   // also if decorator defines roles it needs to access the action

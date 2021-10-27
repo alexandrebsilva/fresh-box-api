@@ -1,6 +1,6 @@
-import { Entity, Column, ManyToMany } from "typeorm";
+import { Entity, Column, OneToMany } from "typeorm";
 import { BaseEntity } from "./base-entity";
-import { Ingredient } from "./ingredient";
+import { RecipeToIngredient } from "./recipe-to-ingredient";
 
 @Entity()
 export class UnitOfMeasurement extends BaseEntity {
@@ -10,9 +10,10 @@ export class UnitOfMeasurement extends BaseEntity {
   @Column()
   abbreviation!: string;
 
-  @ManyToMany(
-    () => Ingredient,
-    (ingredient: Ingredient) => ingredient.unitsOfMeasurements
+  @OneToMany(
+    () => RecipeToIngredient,
+    (recipeToIngredient: RecipeToIngredient) =>
+      recipeToIngredient.unitOfMeasurement
   )
-  ingredients?: Ingredient[];
+  recipeToIngredients?: RecipeToIngredient[];
 }

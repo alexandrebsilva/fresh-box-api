@@ -2,6 +2,7 @@ import { Entity, Column, JoinColumn, ManyToOne } from "typeorm";
 import { BaseEntity } from "./base-entity";
 import { Ingredient } from "./ingredient";
 import { Recipe } from "./recipe";
+import { UnitOfMeasurement } from "./unit-of-measurement";
 
 @Entity()
 export class RecipeToIngredient extends BaseEntity {
@@ -17,6 +18,14 @@ export class RecipeToIngredient extends BaseEntity {
   )
   @JoinColumn()
   ingredient!: Ingredient;
+
+  @ManyToOne(
+    () => UnitOfMeasurement,
+    (unitOfMeasurement: UnitOfMeasurement) =>
+      unitOfMeasurement.recipeToIngredients
+  )
+  @JoinColumn()
+  unitOfMeasurement!: Ingredient;
 
   @ManyToOne(() => Recipe, (recipe: Recipe) => recipe.recipesToIngredient)
   @JoinColumn()

@@ -6,16 +6,18 @@ import {
   Post,
   BadRequestError,
   QueryParam,
+  Put,
 } from "routing-controllers";
 import { Tag } from "../entities/tag";
 import { PaginatedResponse } from "../models/paginated-response";
+import { TagCreateRequest } from "../models/validatiors/create/tag-request";
 import { TagService } from "../services/tag-service";
 
 @JsonController("/tag")
 export class TagController {
   constructor(private readonly service = new TagService()) {}
 
-  @Get("/find-all")
+  @Get("/all")
   async getAll(
     @QueryParam("page") page: number
   ): Promise<PaginatedResponse<Tag>> {
@@ -25,11 +27,22 @@ export class TagController {
     return result;
   }
 
-  @Get("/find-by-id/:id")
+  @Get("/:id")
   async getOne(@Param("id") id: number): Promise<Tag> {
     const result = await this.service.findById(id);
     if (result === undefined) throw new BadRequestError("Item not found!");
     return result;
+  }
+
+  @Put("/:id")
+  async update(
+    @Param("id") id: number,
+    @Body({ validate: true, required: true })
+    payload: TagCreateRequest
+  ): Promise<{ message: string }> {
+    await this.service.update(id, payload as Tag);
+
+    return { message: "Item updated!" };
   }
 
   // @Post("/")

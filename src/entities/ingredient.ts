@@ -10,9 +10,7 @@ import { Alergy } from "./alergy";
 import { BaseEntity } from "./base-entity";
 import { CategoryIngredient } from "./category-ingredient";
 import { DifficultyLevel } from "./difficulty-level";
-import { IngredientPicture } from "./ingredient-picture";
 import { RecipeToIngredient } from "./recipe-to-ingredient";
-import { UnitOfMeasurement } from "./unit-of-measurement";
 
 @Entity()
 export class Ingredient extends BaseEntity {
@@ -36,20 +34,8 @@ export class Ingredient extends BaseEntity {
   @JoinColumn()
   difficultyLevel!: DifficultyLevel[];
 
-  @ManyToMany(
-    () => UnitOfMeasurement,
-    (unitOfMeasurement: UnitOfMeasurement) => unitOfMeasurement.ingredients
-  )
-  unitsOfMeasurements?: UnitOfMeasurement[];
-
   @ManyToMany(() => Alergy, (alergy: Alergy) => alergy.Recipes)
   alergies?: Alergy[];
-
-  @OneToMany(
-    () => IngredientPicture,
-    (ingredientPicture: IngredientPicture) => ingredientPicture.ingredient
-  )
-  pictures?: IngredientPicture[];
 
   @OneToMany(
     () => RecipeToIngredient,
