@@ -1,6 +1,6 @@
 import { IsOptional, IsString } from "class-validator";
 
-export class TagCreateRequest {
+export class DifficultyLevelCreateRequest {
   @IsString()
   name!: string;
 

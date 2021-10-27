@@ -18,9 +18,7 @@ type FileType = CategoryIngredient;
 
 @JsonController("/category-ingredient")
 export class CategoryIngridientController {
-  constructor(
-    private readonly service: CategoryIngredientService = new CategoryIngredientService()
-  ) {}
+  constructor(private readonly service = new CategoryIngredientService()) {}
 
   @Get("/all")
   async getAll(
@@ -42,9 +40,9 @@ export class CategoryIngridientController {
   @Post("/")
   async create(
     @Body({ validate: true, required: true })
-    ingredient: CategoryIngredientCreateRequest
+    payload: CategoryIngredientCreateRequest
   ): Promise<{ message: string }> {
-    await this.service.create(ingredient);
+    await this.service.create(payload);
 
     return { message: "Item created!" };
   }

@@ -7,7 +7,7 @@ export class DifficultyLevel extends BaseEntity {
   @Column()
   name!: string;
 
-  @Column()
+  @Column({ nullable: true })
   description?: string;
 
   @OneToMany(() => Recipe, (Recipe: Recipe) => Recipe.difficultyLevel)

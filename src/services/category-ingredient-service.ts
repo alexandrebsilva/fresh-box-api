@@ -9,11 +9,11 @@ export class CategoryIngredientService extends BaseService<CategoryIngredient> {
   }
 
   async create(payload: CategoryIngredientCreateRequest): Promise<void> {
-    const categoryIngredient = {
+    const newRow = {
       ...new CategoryIngredient(),
       ...payload,
     };
 
-    await getRepository(CategoryIngredient).save(categoryIngredient);
+    await getRepository(CategoryIngredient).save(newRow);
   }
 }

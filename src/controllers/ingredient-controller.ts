@@ -2,38 +2,66 @@ import {
   JsonController,
   Param,
   Body,
-  Get,
   Post,
-  BadRequestError,
+  Put,
+  Get,
   QueryParam,
+  BadRequestError,
+  Delete,
 } from "routing-controllers";
 import { Ingredient } from "../entities/ingredient";
 import { PaginatedResponse } from "../models/paginated-response";
-import { IngredientService } from "../services/ingredient-service";
+import { CategoryIngredientCreateRequest } from "../models/validatiors/create/category-ingredient-request";
+import { IngredientService } from "../services";
+
+type FileType = Ingredient;
 
 @JsonController("/ingredient")
-export class IngredientController {
+export class CategoryIngridientController {
   constructor(private readonly service = new IngredientService()) {}
-
-  @Get("/:id")
-  async getOne(@Param("id") id: number): Promise<Ingredient> {
-    const result = await this.service.findById(id);
-    if (result === undefined) throw new BadRequestError("Item not found!");
-    return result;
-  }
 
   @Get("/all")
   async getAll(
     @QueryParam("page") page: number
-  ): Promise<PaginatedResponse<Ingredient>> {
+  ): Promise<PaginatedResponse<FileType>> {
+    page = page === undefined ? 1 : page;
     const result = await this.service.findAll(page);
 
     return result;
   }
 
+  @Get("/find-by-id/:id")
+  async getOne(@Param("id") id: number): Promise<FileType> {
+    const result = await this.service.findById(id);
+    if (result === undefined) throw new BadRequestError("Item not found!");
+    return result;
+  }
+
   // @Post("/")
-  // async create(@Body() ingredient: any): Promise<{ message: string }> {
+  // async create(
+  //   @Body({ validate: true, required: true })
+  //   ingredient: IngredientCreateRequest
+  // ): Promise<{ message: string }> {
   //   await this.service.create(ingredient);
+
   //   return { message: "Item created!" };
   // }
+
+  @Put("/:id")
+  async update(
+    @Param("id") id: number,
+    @Body({ validate: true, required: true })
+    payload: CategoryIngredientCreateRequest
+  ): Promise<{ message: string }> {
+    await this.service.update(id, payload as FileType);
+
+    return { message: "Item updated!" };
+  }
+
+  @Delete("/:id")
+  async delete(@Param("id") id: number): Promise<{ message: string }> {
+    await this.service.delete(id);
+
+    return { message: "Item deleted!" };
+  }
 }

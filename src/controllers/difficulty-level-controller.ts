@@ -10,17 +10,16 @@ import {
   Delete,
 } from "routing-controllers";
 import { DifficultyLevel } from "../entities/difficulty-level";
-import { Tag } from "../entities/tag";
 import { PaginatedResponse } from "../models/paginated-response";
 import { DifficultyLevelCreateRequest } from "../models/validatiors/create/difficulty-level-request";
 import { DifficultyLevelUpdateRequest } from "../models/validatiors/update/category-ingredient-request";
-import { TagService } from "../services";
+import { DifficultyLevelService } from "../services";
 
-type FileType = Tag;
+type FileType = DifficultyLevel;
 
-@JsonController("/tag")
+@JsonController("/difficulty-level")
 export class CategoryIngridientController {
-  constructor(private readonly service = new TagService()) {}
+  constructor(private readonly service = new DifficultyLevelService()) {}
 
   @Get("/all")
   async getAll(

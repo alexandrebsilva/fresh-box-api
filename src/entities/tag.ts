@@ -7,6 +7,9 @@ export class Tag extends BaseEntity {
   @Column()
   name!: string;
 
+  @Column({ nullable: true })
+  description?: string;
+
   @ManyToMany(() => Recipe, (Recipe: Recipe) => Recipe.tags)
   Recipes?: Recipe[];
 }

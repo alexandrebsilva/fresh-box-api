@@ -1,8 +1,9 @@
 import { IsOptional, IsString } from "class-validator";
 
-export class TagCreateRequest {
+export class CategoryIngredientUpdateRequest {
+  @IsOptional()
   @IsString()
-  name!: string;
+  name?: string;
 
   @IsOptional()
   @IsString()

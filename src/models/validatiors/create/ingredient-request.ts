@@ -1,10 +1,10 @@
 import { IsOptional, IsString } from "class-validator";
 
-export class TagCreateRequest {
+export class IngredientCreateRequest {
   @IsString()
   name!: string;
 
-  @IsOptional()
   @IsString()
+  @IsOptional()
   description?: string;
 }
