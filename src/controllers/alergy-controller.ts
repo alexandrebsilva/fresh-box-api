@@ -10,17 +10,17 @@ import {
   Delete,
 } from "routing-controllers";
 import { httpValidatorOptions } from "../configs/http-validatior-options";
-import { DifficultyLevel } from "../entities/difficulty-level";
+import { Alergy } from "../entities/alergy";
 import { PaginatedResponse } from "../models/paginated-response";
 import { DifficultyLevelCreateRequest } from "../models/validatiors/create/difficulty-level-request";
 import { DifficultyLevelUpdateRequest } from "../models/validatiors/update/category-ingredient-request";
-import { DifficultyLevelService } from "../services";
+import { AlergyService } from "../services";
 
-type FileType = DifficultyLevel;
+type FileType = Alergy;
 
-@JsonController("/difficulty-level")
+@JsonController("/alergy")
 export class CategoryIngridientController {
-  constructor(private readonly service = new DifficultyLevelService()) {}
+  constructor(private readonly service = new AlergyService()) {}
 
   @Get("/all")
   async getAll(

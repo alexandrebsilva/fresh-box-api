@@ -8,6 +8,7 @@ import {
   QueryParam,
   Put,
 } from "routing-controllers";
+import { httpValidatorOptions } from "../configs/http-validatior-options";
 import { CategoryIngredient } from "../entities/category-ingredient";
 import { UnitOfMeasurement } from "../entities/unit-of-measurement";
 import { PaginatedResponse } from "../models/paginated-response";
@@ -29,7 +30,7 @@ export class UnitOfMeasurementController {
 
   @Post("/")
   async create(
-    @Body({ validate: true, required: true })
+    @Body(httpValidatorOptions)
     ingredient: UnitOfMeasurementCreateRequest
   ): Promise<{ message: string }> {
     await this.service.create(ingredient);
@@ -40,7 +41,7 @@ export class UnitOfMeasurementController {
   @Put("/:id")
   async update(
     @Param("id") id: number,
-    @Body({ validate: true, required: true })
+    @Body(httpValidatorOptions)
     payload: UnitOfMeasurementCreateRequest
   ): Promise<{ message: string }> {
     await this.service.update(id, payload as UnitOfMeasurement);

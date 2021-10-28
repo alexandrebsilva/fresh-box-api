@@ -10,17 +10,17 @@ import {
   Delete,
 } from "routing-controllers";
 import { httpValidatorOptions } from "../configs/http-validatior-options";
-import { DifficultyLevel } from "../entities/difficulty-level";
+import { Step } from "../entities/step";
 import { PaginatedResponse } from "../models/paginated-response";
-import { DifficultyLevelCreateRequest } from "../models/validatiors/create/difficulty-level-request";
-import { DifficultyLevelUpdateRequest } from "../models/validatiors/update/category-ingredient-request";
-import { DifficultyLevelService } from "../services";
+import { StepCreateRequest } from "../models/validatiors/create/step-request";
+import { StepUpdateRequest } from "../models/validatiors/update/step-request";
+import { StepService } from "../services";
 
-type FileType = DifficultyLevel;
+type FileType = Step;
 
-@JsonController("/difficulty-level")
+@JsonController("/step")
 export class CategoryIngridientController {
-  constructor(private readonly service = new DifficultyLevelService()) {}
+  constructor(private readonly service = new StepService()) {}
 
   @Get("/all")
   async getAll(
@@ -42,7 +42,7 @@ export class CategoryIngridientController {
   @Post("/")
   async create(
     @Body(httpValidatorOptions)
-    payload: DifficultyLevelCreateRequest
+    payload: StepCreateRequest
   ): Promise<{ message: string }> {
     await this.service.create(payload);
 
@@ -53,7 +53,7 @@ export class CategoryIngridientController {
   async update(
     @Param("id") id: number,
     @Body(httpValidatorOptions)
-    payload: DifficultyLevelUpdateRequest
+    payload: StepUpdateRequest
   ): Promise<{ message: string }> {
     await this.service.update(id, payload as FileType);
 

@@ -9,6 +9,7 @@ import {
   BadRequestError,
   Delete,
 } from "routing-controllers";
+import { httpValidatorOptions } from "../configs/http-validatior-options";
 import { CategoryIngredient } from "../entities/category-ingredient";
 import { PaginatedResponse } from "../models/paginated-response";
 import { CategoryIngredientCreateRequest } from "../models/validatiors/create/category-ingredient-request";
@@ -39,7 +40,7 @@ export class CategoryIngridientController {
 
   @Post("/")
   async create(
-    @Body({ validate: true, required: true })
+    @Body(httpValidatorOptions)
     payload: CategoryIngredientCreateRequest
   ): Promise<{ message: string }> {
     await this.service.create(payload);
@@ -50,7 +51,7 @@ export class CategoryIngridientController {
   @Put("/:id")
   async update(
     @Param("id") id: number,
-    @Body({ validate: true, required: true })
+    @Body(httpValidatorOptions)
     payload: CategoryIngredientCreateRequest
   ): Promise<{ message: string }> {
     await this.service.update(id, payload as FileType);

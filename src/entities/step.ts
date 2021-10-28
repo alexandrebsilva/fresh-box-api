@@ -8,7 +8,10 @@ export class Step extends BaseEntity {
   title!: string;
 
   @Column()
-  description?: string;
+  description!: string;
+
+  @Column()
+  order!: number;
 
   @ManyToOne(() => Recipe, (Recipe: Recipe) => Recipe.difficultyLevel)
   Recipe?: Recipe;

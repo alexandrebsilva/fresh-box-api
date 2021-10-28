@@ -9,11 +9,11 @@ import {
   BadRequestError,
   Delete,
 } from "routing-controllers";
-import { DifficultyLevel } from "../entities/difficulty-level";
+import { httpValidatorOptions } from "../configs/http-validatior-options";
 import { Tag } from "../entities/tag";
 import { PaginatedResponse } from "../models/paginated-response";
-import { DifficultyLevelCreateRequest } from "../models/validatiors/create/difficulty-level-request";
-import { DifficultyLevelUpdateRequest } from "../models/validatiors/update/category-ingredient-request";
+import { TagCreateRequest } from "../models/validatiors/create/tag-request";
+import { TagUpdateRequest } from "../models/validatiors/update/tag-request";
 import { TagService } from "../services";
 
 type FileType = Tag;
@@ -41,8 +41,8 @@ export class CategoryIngridientController {
 
   @Post("/")
   async create(
-    @Body({ validate: true, required: true })
-    payload: DifficultyLevelCreateRequest
+    @Body(httpValidatorOptions)
+    payload: TagCreateRequest
   ): Promise<{ message: string }> {
     await this.service.create(payload);
 
@@ -52,8 +52,8 @@ export class CategoryIngridientController {
   @Put("/:id")
   async update(
     @Param("id") id: number,
-    @Body({ validate: true, required: true })
-    payload: DifficultyLevelUpdateRequest
+    @Body(httpValidatorOptions)
+    payload: TagUpdateRequest
   ): Promise<{ message: string }> {
     await this.service.update(id, payload as FileType);
 
