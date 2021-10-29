@@ -12,11 +12,13 @@ import {
 import { httpValidatorOptions } from "../configs/http-validatior-options";
 import { Alergy } from "../entities/alergy";
 import { PaginatedResponse } from "../models/paginated-response";
-import { DifficultyLevelCreateRequest } from "../models/validatiors/create/difficulty-level-request";
-import { DifficultyLevelUpdateRequest } from "../models/validatiors/update/category-ingredient-request";
+import { AlergyCreateRequest } from "../models/validatiors/create/alergy-request";
+import { AlergyUpdateRequest } from "../models/validatiors/update/alergy-request";
 import { AlergyService } from "../services";
 
 type FileType = Alergy;
+type ValidatorCreate = AlergyCreateRequest;
+type ValidatorUpdate = AlergyUpdateRequest;
 
 @JsonController("/alergy")
 export class CategoryIngridientController {
@@ -42,9 +44,9 @@ export class CategoryIngridientController {
   @Post("/")
   async create(
     @Body(httpValidatorOptions)
-    payload: DifficultyLevelCreateRequest
+    payload: ValidatorCreate
   ): Promise<{ message: string }> {
-    await this.service.create(payload);
+    await this.service.create(payload as unknown as FileType);
 
     return { message: "Item created!" };
   }
@@ -53,7 +55,7 @@ export class CategoryIngridientController {
   async update(
     @Param("id") id: number,
     @Body(httpValidatorOptions)
-    payload: DifficultyLevelUpdateRequest
+    payload: ValidatorUpdate
   ): Promise<{ message: string }> {
     await this.service.update(id, payload as FileType);
 

@@ -1,15 +1,6 @@
-import {
-  Entity,
-  Column,
-  ManyToMany,
-  ManyToOne,
-  OneToMany,
-  JoinColumn,
-} from "typeorm";
-import { Alergy } from "./alergy";
+import { Entity, Column, OneToMany, ManyToOne, JoinColumn } from "typeorm";
 import { BaseEntity } from "./base-entity";
 import { CategoryIngredient } from "./category-ingredient";
-import { DifficultyLevel } from "./difficulty-level";
 import { RecipeToIngredient } from "./recipe-to-ingredient";
 
 @Entity()
@@ -17,25 +8,16 @@ export class Ingredient extends BaseEntity {
   @Column()
   name!: string;
 
-  @Column()
-  description!: string;
+  @Column({ nullable: true })
+  description?: string;
 
-  @OneToMany(
+  @ManyToOne(
     () => CategoryIngredient,
-    (categoryIngredient: CategoryIngredient) => categoryIngredient.ingredients
+    (categoryIngredient: CategoryIngredient) => categoryIngredient.ingredients,
+    { cascade: true }
   )
   @JoinColumn()
   category!: CategoryIngredient;
-
-  @ManyToOne(
-    () => DifficultyLevel,
-    (difficultyLevel: DifficultyLevel) => difficultyLevel.Recipes
-  )
-  @JoinColumn()
-  difficultyLevel!: DifficultyLevel[];
-
-  @ManyToMany(() => Alergy, (alergy: Alergy) => alergy.Recipes)
-  alergies?: Alergy[];
 
   @OneToMany(
     () => RecipeToIngredient,

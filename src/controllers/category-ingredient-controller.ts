@@ -13,9 +13,12 @@ import { httpValidatorOptions } from "../configs/http-validatior-options";
 import { CategoryIngredient } from "../entities/category-ingredient";
 import { PaginatedResponse } from "../models/paginated-response";
 import { CategoryIngredientCreateRequest } from "../models/validatiors/create/category-ingredient-request";
+import { CategoryIngredientUpdateRequest } from "../models/validatiors/update/difficulty-level-request";
 import { CategoryIngredientService } from "../services";
 
 type FileType = CategoryIngredient;
+type ValidatorCreate = CategoryIngredientCreateRequest;
+type ValidatorUpdate = CategoryIngredientUpdateRequest;
 
 @JsonController("/category-ingredient")
 export class CategoryIngridientController {
@@ -41,9 +44,9 @@ export class CategoryIngridientController {
   @Post("/")
   async create(
     @Body(httpValidatorOptions)
-    payload: CategoryIngredientCreateRequest
+    payload: ValidatorCreate
   ): Promise<{ message: string }> {
-    await this.service.create(payload);
+    await this.service.create(payload as unknown as FileType);
 
     return { message: "Item created!" };
   }
@@ -52,7 +55,7 @@ export class CategoryIngridientController {
   async update(
     @Param("id") id: number,
     @Body(httpValidatorOptions)
-    payload: CategoryIngredientCreateRequest
+    payload: ValidatorUpdate
   ): Promise<{ message: string }> {
     await this.service.update(id, payload as FileType);
 

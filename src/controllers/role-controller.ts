@@ -10,19 +10,19 @@ import {
   Delete,
 } from "routing-controllers";
 import { httpValidatorOptions } from "../configs/http-validatior-options";
-import { Step } from "../entities/step";
+import { Tag } from "../entities/tag";
 import { PaginatedResponse } from "../models/paginated-response";
-import { StepCreateRequest } from "../models/validatiors/create/step-request";
-import { StepUpdateRequest } from "../models/validatiors/update/step-request";
-import { StepService } from "../services";
+import { TagCreateRequest } from "../models/validatiors/create/tag-request";
+import { TagUpdateRequest } from "../models/validatiors/update/tag-request";
+import { RoleService } from "../services";
 
-type FileType = Step;
-type ValidatorCreate = StepCreateRequest;
-type ValidatorUpdate = StepUpdateRequest;
+type FileType = Tag;
+type ValidatorCreate = TagCreateRequest;
+type ValidatorUpdate = TagUpdateRequest;
 
-@JsonController("/step")
-export class StepController {
-  constructor(private readonly service = new StepService()) {}
+@JsonController("/role")
+export class RoleController {
+  constructor(private readonly service = new RoleService()) {}
 
   @Get("/all")
   async getAll(

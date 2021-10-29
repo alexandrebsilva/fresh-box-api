@@ -23,6 +23,10 @@ export abstract class BaseService<T> {
     return { total, page, payload };
   }
 
+  async create(payload: T): Promise<void> {
+    await getRepository(this.sourceEntity).save(payload);
+  }
+
   async update(id: number, payload: T): Promise<void> {
     const result = await this.findById(id);
     if (!result) {

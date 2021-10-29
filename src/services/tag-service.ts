@@ -7,13 +7,4 @@ export class TagService extends BaseService<Tag> {
   constructor() {
     super(Tag);
   }
-
-  async create(payload: TagCreateRequest): Promise<void> {
-    const newRow = {
-      ...new Tag(),
-      ...payload,
-    };
-
-    await getRepository(Tag).save(newRow);
-  }
 }

@@ -17,9 +17,11 @@ import { TagUpdateRequest } from "../models/validatiors/update/tag-request";
 import { TagService } from "../services";
 
 type FileType = Tag;
+type ValidatorCreate = TagCreateRequest;
+type ValidatorUpdate = TagUpdateRequest;
 
 @JsonController("/tag")
-export class CategoryIngridientController {
+export class TagController {
   constructor(private readonly service = new TagService()) {}
 
   @Get("/all")
@@ -42,9 +44,9 @@ export class CategoryIngridientController {
   @Post("/")
   async create(
     @Body(httpValidatorOptions)
-    payload: TagCreateRequest
+    payload: ValidatorCreate
   ): Promise<{ message: string }> {
-    await this.service.create(payload);
+    await this.service.create(payload as unknown as FileType);
 
     return { message: "Item created!" };
   }
@@ -53,7 +55,7 @@ export class CategoryIngridientController {
   async update(
     @Param("id") id: number,
     @Body(httpValidatorOptions)
-    payload: TagUpdateRequest
+    payload: ValidatorUpdate
   ): Promise<{ message: string }> {
     await this.service.update(id, payload as FileType);
 

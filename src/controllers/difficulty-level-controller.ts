@@ -17,6 +17,8 @@ import { DifficultyLevelUpdateRequest } from "../models/validatiors/update/categ
 import { DifficultyLevelService } from "../services";
 
 type FileType = DifficultyLevel;
+type ValidatorCreate = DifficultyLevelCreateRequest;
+type ValidatorUpdate = DifficultyLevelUpdateRequest;
 
 @JsonController("/difficulty-level")
 export class CategoryIngridientController {
@@ -42,9 +44,9 @@ export class CategoryIngridientController {
   @Post("/")
   async create(
     @Body(httpValidatorOptions)
-    payload: DifficultyLevelCreateRequest
+    payload: ValidatorCreate
   ): Promise<{ message: string }> {
-    await this.service.create(payload);
+    await this.service.create(payload as unknown as FileType);
 
     return { message: "Item created!" };
   }
@@ -53,7 +55,7 @@ export class CategoryIngridientController {
   async update(
     @Param("id") id: number,
     @Body(httpValidatorOptions)
-    payload: DifficultyLevelUpdateRequest
+    payload: ValidatorUpdate
   ): Promise<{ message: string }> {
     await this.service.update(id, payload as FileType);
 
