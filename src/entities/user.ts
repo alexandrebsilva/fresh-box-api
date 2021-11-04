@@ -5,6 +5,7 @@ import {
   JoinColumn,
   OneToMany,
   ManyToOne,
+  JoinTable,
 } from "typeorm";
 import { Address } from "./address";
 import { BaseEntity } from "./base-entity";
@@ -25,10 +26,10 @@ export class User extends BaseEntity {
   @Column()
   dateOfBirth!: string;
 
-  @Column()
+  @Column({ unique: true })
   cpf?: string;
 
-  @Column()
+  @Column({ unique: true })
   email!: string;
 
   @Column()
@@ -52,7 +53,10 @@ export class User extends BaseEntity {
   @JoinColumn()
   userStatus!: UserStatus;
 
-  @OneToMany(() => CreditCard, (creditCard: CreditCard) => creditCard.user)
+  @OneToMany(() => CreditCard, (creditCard: CreditCard) => creditCard.user, {
+    cascade: true,
+  })
+  @JoinTable()
   creditCards?: CreditCard[];
 
   @ManyToOne(() => Plan, (plan: Plan) => plan.users)

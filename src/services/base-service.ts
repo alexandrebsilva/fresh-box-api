@@ -11,6 +11,11 @@ export abstract class BaseService<T> {
     return result;
   }
 
+  async findByIds(ids: number[]): Promise<T[]> {
+    const result = await getRepository(this.sourceEntity).findByIds(ids);
+    return result;
+  }
+
   async findAll(page: number): Promise<PaginatedResponse<T>> {
     const [payload, total] = await getRepository(
       this.sourceEntity

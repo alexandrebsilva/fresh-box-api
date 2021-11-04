@@ -10,19 +10,20 @@ import {
   Delete,
 } from "routing-controllers";
 import { httpValidatorOptions } from "../configs/http-validatior-options";
-import { Role } from "../entities/role";
+import { Alergy } from "../entities/alergy";
+import { Recipe } from "../entities/recipe";
 import { PaginatedResponse } from "../models/paginated-response";
-import { RoleCreateRequest } from "../models/validatiors/create/role-request";
-import { RoleUpdateRequest } from "../models/validatiors/update/role-request";
-import { RoleService } from "../services";
+import { RecipeCreateRequest } from "../models/validatiors/create/recipe-request";
+import { RecipeUpdateRequest } from "../models/validatiors/update/recipe-request";
+import { RecipeService } from "../services";
 
-type FileType = Role;
-type ValidatorCreate = RoleCreateRequest;
-type ValidatorUpdate = RoleUpdateRequest;
+type FileType = Recipe;
+type ValidatorCreate = RecipeCreateRequest;
+type ValidatorUpdate = RecipeUpdateRequest;
 
-@JsonController("/role")
-export class RoleController {
-  constructor(private readonly service = new RoleService()) {}
+@JsonController("/recipe")
+export class RecipeController {
+  constructor(private readonly service = new RecipeService()) {}
 
   @Get("/all")
   async getAll(
@@ -46,7 +47,7 @@ export class RoleController {
     @Body(httpValidatorOptions)
     payload: ValidatorCreate
   ): Promise<{ message: string }> {
-    await this.service.create(payload as unknown as FileType);
+    await this.service.createFull(payload);
 
     return { message: "Item created!" };
   }
@@ -57,7 +58,7 @@ export class RoleController {
     @Body(httpValidatorOptions)
     payload: ValidatorUpdate
   ): Promise<{ message: string }> {
-    await this.service.update(id, payload as FileType);
+    await this.service.update(id, payload as unknown as FileType);
 
     return { message: "Item updated!" };
   }

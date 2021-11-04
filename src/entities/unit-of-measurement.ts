@@ -4,10 +4,10 @@ import { RecipeToIngredient } from "./recipe-to-ingredient";
 
 @Entity()
 export class UnitOfMeasurement extends BaseEntity {
-  @Column()
+  @Column({ unique: true })
   name!: string;
 
-  @Column()
+  @Column({ unique: true })
   abbreviation!: string;
 
   @OneToMany(

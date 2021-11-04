@@ -11,7 +11,7 @@ export class Address extends BaseEntity {
   number!: string;
 
   @Column()
-  zpcode!: string;
+  zipcode!: string;
 
   @Column()
   neighborhood!: string;

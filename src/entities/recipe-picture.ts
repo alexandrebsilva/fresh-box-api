@@ -13,7 +13,9 @@ export class RecipePicture extends BaseEntity {
   @Column()
   path!: string;
 
-  @ManyToOne(() => Recipe, (recipe: Recipe) => recipe.pictures)
+  @ManyToOne(() => Recipe, (recipe: Recipe) => recipe.pictures, {
+    nullable: false,
+  })
   @JoinColumn()
   recipe!: Recipe;
 }

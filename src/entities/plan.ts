@@ -4,7 +4,7 @@ import { User } from "./user";
 
 @Entity()
 export class Plan extends BaseEntity {
-  @Column()
+  @Column({ unique: true })
   name!: string;
 
   @Column()

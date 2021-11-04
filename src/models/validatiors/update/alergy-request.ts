@@ -4,4 +4,8 @@ export class AlergyUpdateRequest {
   @IsOptional()
   @IsString()
   name?: string;
+
+  @IsOptional()
+  @IsString()
+  description?: string;
 }
