@@ -1,5 +1,5 @@
 import axios from "axios";
-
+// populate for tests
 async function populate() {
   await axios.post("http://localhost:3000/alergy", {
     name: "alergy 4",
