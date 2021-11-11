@@ -1,5 +1,12 @@
-import { AlergyService, TagService } from ".";
+import { getRepository } from "typeorm";
+import {
+  AlergyService,
+  IngredientService,
+  TagService,
+  UnitOfMeasurementService,
+} from ".";
 import { Recipe } from "../entities/recipe";
+import { RecipeAux } from "../entities/recipe-aux";
 import { RecipeCreateRequest } from "../models/validatiors/create/recipe-request";
 import { BaseService } from "./base-service";
 
@@ -7,13 +14,13 @@ export class RecipeService extends BaseService<Recipe> {
   constructor() {
     super(Recipe);
   }
-  // async findById(id: number): Promise<Recipe> {
-  //   const result = await getRepository(Recipe).find({
-  //     where: { id },
-  //     relations: ["difficultyLevel", "tags", "alergies", "pictures"],
-  //   });
-  //   return result[0];
-  // }
+
+  async findAllFull(): Promise<Recipe[]> {
+    const result = await getRepository(Recipe).find({
+      relations: ["tags", "alergies", "steps"],
+    });
+    return result;
+  }
 
   async createFull(payload: RecipeCreateRequest): Promise<void> {
     const alergies = await new AlergyService().findByIds(
@@ -22,7 +29,22 @@ export class RecipeService extends BaseService<Recipe> {
 
     const tags = await new TagService().findByIds(payload.tags ?? []);
 
-    const recipe = { ...payload, tags, alergies } as unknown as Recipe;
+    const recipeAuxs = payload.ingredients.map((item) => {
+      return {
+        ...new RecipeAux(),
+        ingredient: item.ingredient,
+        unitOfMeasurement: item.unitOfMeasurement,
+        amount: item.amount,
+        isIncluded: item.isIncluded,
+      };
+    });
+
+    const recipe = {
+      ...payload,
+      tags,
+      alergies,
+      recipeAuxs,
+    } as unknown as Recipe;
     await this.create(recipe);
   }
 }

@@ -6,6 +6,8 @@ import {
   ValidateNested,
 } from "class-validator";
 import { RecipePictureRequest } from "../recipe-picture-request";
+import { RecipeAuxCreateRequest } from "./recipe-aux-request";
+import { StepCreateRequest } from "./step-request";
 
 export class RecipeCreateRequest {
   @IsString()
@@ -32,4 +34,10 @@ export class RecipeCreateRequest {
   @IsArray()
   @ValidateNested()
   pictures?: RecipePictureRequest[];
+
+  @IsArray()
+  ingredients!: RecipeAuxCreateRequest[];
+
+  @IsArray()
+  steps?: StepCreateRequest;
 }

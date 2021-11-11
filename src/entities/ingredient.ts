@@ -1,7 +1,7 @@
 import { Entity, Column, OneToMany, ManyToOne, JoinColumn } from "typeorm";
 import { BaseEntity } from "./base-entity";
 import { CategoryIngredient } from "./category-ingredient";
-import { RecipeToIngredient } from "./recipe-to-ingredient";
+import { RecipeAux } from "./recipe-aux";
 
 @Entity()
 export class Ingredient extends BaseEntity {
@@ -19,9 +19,6 @@ export class Ingredient extends BaseEntity {
   @JoinColumn()
   category!: CategoryIngredient;
 
-  @OneToMany(
-    () => RecipeToIngredient,
-    (recipeToIngredient: RecipeToIngredient) => recipeToIngredient.ingredient
-  )
-  recipesToIngredient?: RecipeToIngredient[];
+  @OneToMany(() => RecipeAux, (recipeAux: RecipeAux) => recipeAux.ingredient)
+  recipeAuxs?: RecipeAux[];
 }

@@ -9,8 +9,9 @@ import {
 import { Alergy } from "./alergy";
 import { BaseEntity } from "./base-entity";
 import { DifficultyLevel } from "./difficulty-level";
+import { RecipeAux } from "./recipe-aux";
 import { RecipePicture } from "./recipe-picture";
-import { RecipeToIngredient } from "./recipe-to-ingredient";
+import { Step } from "./step";
 import { Tag } from "./tag";
 
 @Entity()
@@ -47,10 +48,11 @@ export class Recipe extends BaseEntity {
   )
   pictures?: RecipePicture[];
 
-  @OneToMany(
-    () => RecipeToIngredient,
-    (recipeToIngredient: RecipeToIngredient) => recipeToIngredient.recipe,
-    { cascade: true }
-  )
-  recipesToIngredient?: RecipeToIngredient[];
+  @OneToMany(() => Step, (step: Step) => step.recipe, { cascade: true })
+  steps?: Step[];
+
+  @OneToMany(() => RecipeAux, (recipeAux: RecipeAux) => recipeAux.recipe, {
+    cascade: true,
+  })
+  recipeAuxs!: RecipeAux[];
 }

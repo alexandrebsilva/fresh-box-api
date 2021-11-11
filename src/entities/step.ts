@@ -13,6 +13,6 @@ export class Step extends BaseEntity {
   @Column()
   order!: number;
 
-  @ManyToOne(() => Recipe, (Recipe: Recipe) => Recipe.difficultyLevel)
-  Recipe?: Recipe;
+  @ManyToOne(() => Recipe, (recipe: Recipe) => recipe.steps)
+  recipe?: Recipe;
 }

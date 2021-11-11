@@ -1,3 +1,4 @@
+import { validate } from "class-validator";
 import {
   JsonController,
   Param,
@@ -26,11 +27,9 @@ export class RecipeController {
   constructor(private readonly service = new RecipeService()) {}
 
   @Get("/all")
-  async getAll(
-    @QueryParam("page") page: number
-  ): Promise<PaginatedResponse<FileType>> {
+  async getAll(@QueryParam("page") page: number): Promise<any> {
     page = page === undefined ? 1 : page;
-    const result = await this.service.findAll(page);
+    const result = await this.service.findAllFull();
 
     return result;
   }
@@ -58,6 +57,7 @@ export class RecipeController {
     @Body(httpValidatorOptions)
     payload: ValidatorUpdate
   ): Promise<{ message: string }> {
+    validate(payload);
     await this.service.update(id, payload as unknown as FileType);
 
     return { message: "Item updated!" };
