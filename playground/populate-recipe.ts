@@ -2,12 +2,12 @@ import axios from "axios";
 // populate for tests
 async function populate() {
   await axios.post("http://localhost:3000/alergy", {
-    name: "alergy 4",
-    description: "alergy 2",
+    name: "alergy 1",
+    description: "alergy 1",
   });
   await axios.post("http://localhost:3000/tag", {
-    name: "tag 3",
-    description: "tag 2",
+    name: "tag 1",
+    description: "tag 1",
   });
 
   await axios.post("http://localhost:3000/unit-of-measurement", {
@@ -22,7 +22,7 @@ async function populate() {
 
   await axios.post("http://localhost:3000/ingredient", {
     name: "ingrediente",
-    description: "description",
+    description: "descrição do ingrediente",
     category: 1,
   });
 }
