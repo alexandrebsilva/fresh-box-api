@@ -23,11 +23,11 @@ export class User extends BaseEntity {
   @Column()
   lastName!: string;
 
-  @Column()
+  @Column({ nullable: true })
   dateOfBirth!: string;
 
   @Column({ unique: true })
-  cpf?: string;
+  cpf!: string;
 
   @Column({ unique: true })
   email!: string;
@@ -35,7 +35,7 @@ export class User extends BaseEntity {
   @Column()
   password!: string;
 
-  @Column()
+  @Column({ nullable: true })
   refreshToken?: string;
 
   @Column()

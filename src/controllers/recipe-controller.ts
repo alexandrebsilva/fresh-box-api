@@ -11,9 +11,7 @@ import {
   Delete,
 } from "routing-controllers";
 import { httpValidatorOptions } from "../configs/http-validatior-options";
-import { Alergy } from "../entities/alergy";
 import { Recipe } from "../entities/recipe";
-import { PaginatedResponse } from "../models/paginated-response";
 import { RecipeCreateRequest } from "../models/validatiors/create/recipe-request";
 import { RecipeUpdateRequest } from "../models/validatiors/update/recipe-request";
 import { RecipeService } from "../services";

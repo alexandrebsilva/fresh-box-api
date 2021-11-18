@@ -2,27 +2,23 @@
 import "reflect-metadata";
 import path from "path";
 
-import { createExpressServer } from "routing-controllers";
+import { Action, createExpressServer } from "routing-controllers";
 import { App } from "./app";
-import { createConnection } from "typeorm";
+import { createConnection, getCustomRepository } from "typeorm";
+import { UserRepository } from "./repository/user-repository";
+import { AuthService } from "./services";
 
 // creates express app, registers all controller routes and returns you express app instance
 export const app = createExpressServer({
   validation: true,
-  // authorizationChecker: async (action: Action, roles: string[]) => {
+  // currentUserChecker: async (action: Action, roles: string[]) => {
   //   // here you can use request/response objects from action
-  //   // also if decorator defines roles it needs to access the action
-  //   // you can use them to provide granular access check
-  //   // checker must return either boolean (true or false)
-  //   // either promise that resolves a boolean value
+  //   // you need to provide a user object that will be injected in controller actions
   //   // demo code:
   //   const token = action.request.headers["authorization"];
-
-  //   const user = await getEntityManager().findOneByToken(User, token);
-  //   if (user && !roles.length) return true;
-  //   if (user && roles.find((role) => user.roles.indexOf(role) !== -1))
-  //     return true;
-
+  //   if (token) {
+  //     return new AuthService().validateAndDecodeToken(token);
+  //   }
   //   return false;
   // },
   controllers: [path.join(__dirname + "/controllers/*")],
